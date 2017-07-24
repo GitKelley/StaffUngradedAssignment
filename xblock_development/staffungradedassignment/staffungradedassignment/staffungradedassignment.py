@@ -111,6 +111,11 @@ class StaffUngradedAssignmentXBlock(XBlock, StudioEditableXBlockMixin):
 
     editable_fields = ["display_name", "description", "assignment_name" ]
 
+    def resource_string(self, path):
+        """Handy helper for getting resources from our kit."""
+        data = pkg_resources.resource_string(__name__, path)
+        return data.decode("utf8")
+
     # TO-DO: change this view to display your data your own way.
     def student_view(self, context=None):
         """
@@ -119,7 +124,8 @@ class StaffUngradedAssignmentXBlock(XBlock, StudioEditableXBlockMixin):
         """
 
         html = self.resource_string("static/html/staffungradedassignment.html")
-        frag = Fragment(html)
+        frag = Fragment(unicode(html).format(self=self))
+        #frag = Fragment(html)
         frag.add_css(self.resource_string("static/css/staffungradedassignment.css"))
         frag.add_javascript(self.resource_string("static/js/src/staffungradedassignment.js"))
         frag.initialize_js('StaffUngradedAssignmentXBlock')
