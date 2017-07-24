@@ -1,0 +1,55 @@
+(0.000) QUERY = u'SELECT "workbench_xblockstate"."id", "workbench_xblockstate"."scope", "workbench_xblockstate"."scope_id", "workbench_xblockstate"."user_id", "workbench_xblockstate"."scenario", "workbench_xblockstate"."tag", "workbench_xblockstate"."created", "workbench_xblockstate"."state" FROM "workbench_xblockstate" WHERE ("workbench_xblockstate"."scope" = %s AND "workbench_xblockstate"."tag" = %s AND "workbench_xblockstate"."scope_id" = %s AND "workbench_xblockstate"."scenario" = %s AND "workbench_xblockstate"."user_id" = %s)' - PARAMS = (u'usage', u'staffungradedassignment', u'staffungradedassignmentxblock.staffungradedassignment.d0.u0', u'staffungradedassignmentxblock', u'student_1'); args=(u'usage', u'staffungradedassignment', u'staffungradedassignmentxblock.staffungradedassignment.d0.u0', u'staffungradedassignmentxblock', u'student_1')
+(0.000) QUERY = u'SELECT "workbench_xblockstate"."id", "workbench_xblockstate"."scope", "workbench_xblockstate"."scope_id", "workbench_xblockstate"."user_id", "workbench_xblockstate"."scenario", "workbench_xblockstate"."tag", "workbench_xblockstate"."created", "workbench_xblockstate"."state" FROM "workbench_xblockstate" WHERE ("workbench_xblockstate"."scope" = %s AND "workbench_xblockstate"."tag" = %s AND "workbench_xblockstate"."scope_id" = %s AND "workbench_xblockstate"."scenario" = %s AND "workbench_xblockstate"."user_id" = %s)' - PARAMS = (u'usage', u'staffungradedassignment', u'staffungradedassignmentxblock.staffungradedassignment.d0.u0', u'staffungradedassignmentxblock', u'student_1'); args=(u'usage', u'staffungradedassignment', u'staffungradedassignmentxblock.staffungradedassignment.d0.u0', u'staffungradedassignmentxblock', u'student_1')
+(0.000) QUERY = u'SELECT "workbench_xblockstate"."id", "workbench_xblockstate"."scope", "workbench_xblockstate"."scope_id", "workbench_xblockstate"."user_id", "workbench_xblockstate"."scenario", "workbench_xblockstate"."tag", "workbench_xblockstate"."created", "workbench_xblockstate"."state" FROM "workbench_xblockstate" WHERE ("workbench_xblockstate"."scope" = %s AND "workbench_xblockstate"."tag" = %s AND "workbench_xblockstate"."scope_id" = %s AND "workbench_xblockstate"."scenario" = %s AND "workbench_xblockstate"."user_id" IS NULL)' - PARAMS = (u'definition', u'staffungradedassignment', u'staffungradedassignmentxblock.staffungradedassignment.d0', u'staffungradedassignmentxblock'); args=(u'definition', 'staffungradedassignment', 'staffungradedassignmentxblock.staffungradedassignment.d0', 'staffungradedassignmentxblock')
+(0.001) QUERY = "\n            SELECT name, type FROM sqlite_master\n            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'\n            ORDER BY name" - PARAMS = (); args=None
+(0.001) QUERY = u'SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"' - PARAMS = (); args=()
+(0.000) QUERY = u'BEGIN' - PARAMS = (); args=None
+(0.006) QUERY = u'DELETE FROM "workbench_xblockstate" WHERE "workbench_xblockstate"."scope" = %s' - PARAMS = (u'children',); args=('children',)
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/john/xblock_development/env/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/john/xblock_development/xblock-sdk/workbench/views.py", line 40, in index
+    the_scenarios = sorted(get_scenarios().items())
+  File "/home/john/xblock_development/xblock-sdk/workbench/scenarios.py", line 83, in get_scenarios
+    init_scenarios()
+  File "/home/john/xblock_development/xblock-sdk/workbench/scenarios.py", line 75, in init_scenarios
+    for class_name, cls in sorted(XBlock.load_classes(fail_silently=False)):
+  File "/home/john/xblock_development/env/local/lib/python2.7/site-packages/xblock/plugin.py", line 146, in load_classes
+    yield (class_.name, cls._load_class_entry_point(class_))
+  File "/home/john/xblock_development/env/local/lib/python2.7/site-packages/xblock/plugin.py", line 75, in _load_class_entry_point
+    class_ = entry_point.load()
+  File "/home/john/xblock_development/env/local/lib/python2.7/site-packages/pkg_resources/__init__.py", line 2303, in load
+    return self.resolve()
+  File "/home/john/xblock_development/env/local/lib/python2.7/site-packages/pkg_resources/__init__.py", line 2309, in resolve
+    module = __import__(self.module_name, fromlist=['__name__'], level=0)
+  File "/home/john/xblock_development/staffungradedassignment/staffungradedassignment/__init__.py", line 1, in <module>
+    from .staffungradedassignment import StaffUngradedAssignmentXBlock
+  File "/home/john/xblock_development/staffungradedassignment/staffungradedassignment/staffungradedassignment.py", line 19, in <module>
+    from xblockutils.studio_editable import StudioEditableXBlockMixin
+ImportError: No module named xblockutils.studio_editable
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/john/xblock_development/env/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/john/xblock_development/xblock-sdk/workbench/views.py", line 40, in index
+    the_scenarios = sorted(get_scenarios().items())
+  File "/home/john/xblock_development/xblock-sdk/workbench/scenarios.py", line 83, in get_scenarios
+    init_scenarios()
+  File "/home/john/xblock_development/xblock-sdk/workbench/scenarios.py", line 75, in init_scenarios
+    for class_name, cls in sorted(XBlock.load_classes(fail_silently=False)):
+  File "/home/john/xblock_development/env/local/lib/python2.7/site-packages/xblock/plugin.py", line 146, in load_classes
+    yield (class_.name, cls._load_class_entry_point(class_))
+  File "/home/john/xblock_development/env/local/lib/python2.7/site-packages/xblock/plugin.py", line 75, in _load_class_entry_point
+    class_ = entry_point.load()
+  File "/home/john/xblock_development/env/local/lib/python2.7/site-packages/pkg_resources/__init__.py", line 2303, in load
+    return self.resolve()
+  File "/home/john/xblock_development/env/local/lib/python2.7/site-packages/pkg_resources/__init__.py", line 2309, in resolve
+    module = __import__(self.module_name, fromlist=['__name__'], level=0)
+  File "/home/john/xblock_development/staffungradedassignment/staffungradedassignment/__init__.py", line 1, in <module>
+    from .staffungradedassignment import StaffUngradedAssignmentXBlock
+  File "/home/john/xblock_development/staffungradedassignment/staffungradedassignment/staffungradedassignment.py", line 19, in <module>
+    from xblockutils.studio_editable import StudioEditableXBlockMixin
+ImportError: No module named xblockutils.studio_editable
+Not Found: /favicon.ico
+Not Found: /favicon.ico

@@ -1,0 +1,9 @@
+/* CSS for StaffUngradedAssignmentXBlock */
+
+.staffungradedassignment_block .count {
+    font-weight: bold;
+}
+
+.staffungradedassignment_block p {
+    cursor: pointer;
+}
