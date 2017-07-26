@@ -89,26 +89,6 @@ class StaffUngradedAssignmentXBlock(XBlock, StudioEditableXBlockMixin):
         scope=Scope.user_state
     )
 
-    annotated_filename = String(
-        display_name="Annotated file name",
-        scope=Scope.user_state,
-        default=None,
-        help="Name of the file uploaded"
-    )
-
-    annotated_mimetype = String(
-        display_name="Mime type of annotated file",
-        scope=Scope.user_state,
-        default=None,
-        help="The mimetype of the annotated file uploaded for this assignment."
-    )
-
-    annotated_timestamp = DateTime(
-        display_name="Timestamp",
-        scope=Scope.user_state,
-        default=None,
-        help="When the annotated file was uploaded")
-
     editable_fields = ["display_name", "description", "assignment_name" ]
 
     def resource_string(self, path):
@@ -234,19 +214,22 @@ class StaffUngradedAssignmentXBlock(XBlock, StudioEditableXBlockMixin):
             email.send(fail_silently=False)
 
         except smtplib.SMTPRecipientsRefused, error: # masked 500
-            # Errors in the relay of the message to email won't be
-            # returned to the client. HTTP isn't appropriate for the
-            # transfer or relay of email.
+            """
+            Errors in the relay of the message to email won't be
+            returned to the client. HTTP isn't appropriate for the
+            transfer or relay of email.
+            """
             LOGGER.info("RecipientsRefused '%s'", str(error))
-            MentorMessage.objects.create( #pylint: disable=no-member
-            subject=request.POST.get('subject', ''),
-            message=request.POST.get('message', ''),
-            course_id=course_key_string,
-            is_delivered=False,
-            sent_by=request.user,
-            sent_to=request.user.email,
-            error=str(error)
-            )
+            MentorMessage.objects.create(
+                #pylint: disable=no-member
+                subject=request.POST.get('subject', ''),
+                message=request.POST.get('message', ''),
+                course_id=course_key_string,
+                is_delivered=False,
+                sent_by=request.user,
+                sent_to=request.user.email,
+                error=str(error)
+                )
         except (MultiValueDictKeyError, MultiPartParserError, KeyError), error:
             # 400 catch
             LOGGER.error('Bad Request %s', str(error))
@@ -259,16 +242,6 @@ class StaffUngradedAssignmentXBlock(XBlock, StudioEditableXBlockMixin):
         finally:
             return message, status, content_type #pylint: disable=lost-exception
 
-    @XBlock.json_handler
-    def increment_count(self, data, suffix=''):
-        """
-        An example handler, which increments the data.
-        """
-        # Just to show data coming in...
-        assert data['hello'] == 'world'
-
-        self.count += 1
-        return {"count": self.count}
 
     # workbench while developing your XBlock.
     @staticmethod
